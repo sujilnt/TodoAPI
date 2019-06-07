@@ -1,2 +1,2 @@
-import {start} from './src/server'
-return start();
+import {start} from './server'
+start();

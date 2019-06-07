@@ -2,21 +2,20 @@ import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-//import { connect } from './utils/db';
+import  ModelTasks  from "./Database/tasks/tasks";
+import connect from "./Database/connect";
 
 const todoData = [
 	{
-		id: "1",
+		uid: "1",
 		name: "Jogging Time",
 		description: "Its time to Jog",
-		created: "Mon May 13 2019 15:00:54",
-		completed:true
+		archived:true
 	},{
-		id: "2",
+		uid: "2",
 		name: "Cooking",
 		description: "Cooking sdvsv",
-		created: "Mon May 13 2019 15:00:54",
-		completed:false
+		archived:false
 	}
 ];
 
@@ -33,10 +32,23 @@ app.use(morgan('dev'));
 
 export const start = async () => {
 	try {
-		//await connect()
-		app.listen(3000, () => {
-			console.log(`REST API on http://localhost:3000/api`)
-		})
+		await connect().then(async ()=>{
+			const tasksList = await ModelTasks().create({
+				uid: "1",
+				name: "Jogging Time",
+				description: "Its time to Jog",
+				archived:true
+			});
+			console.log(tasksList);
+			app.listen(3000, () => {
+				console.log(`REST API on http://localhost:3000/api`)
+			});
+			
+		});
+		/*
+		*
+		* */
+		
 	} catch (e) {
 		console.error(e)
 	}

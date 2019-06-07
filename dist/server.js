@@ -13,21 +13,22 @@ var _morgan = _interopRequireDefault(require("morgan"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
+var _tasks = _interopRequireDefault(require("./Database/tasks/tasks"));
+
+var _connect = _interopRequireDefault(require("./Database/connect"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import { connect } from './utils/db';
 const todoData = [{
-  id: "1",
+  uid: "1",
   name: "Jogging Time",
   description: "Its time to Jog",
-  created: "Mon May 13 2019 15:00:54",
-  completed: true
+  archived: true
 }, {
-  id: "2",
+  uid: "2",
   name: "Cooking",
   description: "Cooking sdvsv",
-  created: "Mon May 13 2019 15:00:54",
-  completed: false
+  archived: false
 }];
 const app = (0, _express.default)();
 exports.app = app;
@@ -44,10 +45,21 @@ app.use((0, _morgan.default)('dev'));
 
 const start = async () => {
   try {
-    //await connect()
-    app.listen(3000, () => {
-      console.log(`REST API on http://localhost:3000/api`);
+    await (0, _connect.default)().then(async () => {
+      const tasksList = await (0, _tasks.default)().create({
+        uid: "1",
+        name: "Jogging Time",
+        description: "Its time to Jog",
+        archived: true
+      });
+      console.log(tasksList);
+      app.listen(3000, () => {
+        console.log(`REST API on http://localhost:3000/api`);
+      });
     });
+    /*
+    *
+    * */
   } catch (e) {
     console.error(e);
   }
