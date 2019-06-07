@@ -1,0 +1,38 @@
+{
+  "name": "TodoAPI",
+  "version": "1.0.0",
+  "description": "A backend for Todo Application",
+  "main": "index.js",
+  "author": "Sujil Anto",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec yarn restart",
+    "build": "babel src --out-dir dist",
+    "restart": "rimraf dist && yarn build && yarn start",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^23.4.2",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "cuid": "^2.1.4",
+    "dotenv": "^6.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.2.7",
+    "morgan": "^1.9.1",
+    "validator": "^10.9.0"
+  }
+}
