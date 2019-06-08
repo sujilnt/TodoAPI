@@ -13,53 +13,30 @@ var _morgan = _interopRequireDefault(require("morgan"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
-var _tasks = _interopRequireDefault(require("./Database/tasks/tasks"));
+var _task = _interopRequireDefault(require("./Resources/task/task.router"));
 
-var _connect = _interopRequireDefault(require("./Database/connect"));
+var _connect = _interopRequireDefault(require("./Resources/connect"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const todoData = [{
-  uid: "1",
-  name: "Jogging Time",
-  description: "Its time to Jog",
-  archived: true
-}, {
-  uid: "2",
-  name: "Cooking",
-  description: "Cooking sdvsv",
-  archived: false
-}];
 const app = (0, _express.default)();
 exports.app = app;
 app.disable('x-powered-by');
-app.get("/api", (req, res) => {
-  res.send(todoData);
-});
 app.use((0, _cors.default)());
 app.use((0, _bodyParser.json)());
 app.use((0, _bodyParser.urlencoded)({
   extended: true
 }));
 app.use((0, _morgan.default)('dev'));
+app.use('/api/task', _task.default);
 
 const start = async () => {
   try {
     await (0, _connect.default)().then(async () => {
-      const tasksList = await (0, _tasks.default)().create({
-        uid: "1",
-        name: "Jogging Time",
-        description: "Its time to Jog",
-        archived: true
-      });
-      console.log(tasksList);
-      app.listen(3000, () => {
+      app.listen(3030, () => {
         console.log(`REST API on http://localhost:3000/api`);
       });
     });
-    /*
-    *
-    * */
   } catch (e) {
     console.error(e);
   }
