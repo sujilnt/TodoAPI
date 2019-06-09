@@ -8,15 +8,18 @@ const router = Router();
 
 router
 	.route('/')
-	//.get(controllers.getOne,{"archieve": true});
-	.post(controllers.createOne);
-console.log(router);
+	.get(controllers.getMany)
+	.post(controllers.addMany);
+ 
 // api/task/:id
-/*
+
+
 router
-	.route("/")
-	.get(controllers.getOne);
-	//.put(controllers.updateOne)
-	//.delete(controllers.removeOne);
-*/
+	.route("/:id")
+	.put(controllers.updateOne)
+	.delete(controllers.removeOne);
+
+router
+	.route("/archive")
+	.get(controllers.getDeletedItems);
 export default router;
