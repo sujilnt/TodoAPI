@@ -17,7 +17,7 @@ A REST API  for Todo Application
 
 #### `Steps to use Api `
 1) Create an Account first by send a /signup post request , If status is 200 then token is created as response.
-![alt text]("https://github.com/sujilnt/TodoAPI/blob/master/images/geneate_token.PNG") 
+![alt text](https://github.com/sujilnt/TodoAPI/blob/master/images/geneate_token.PNG) 
 <br/>
 2)Each token is created for each user to inorder to identify each todo tasks.
 
