@@ -14,14 +14,13 @@ A REST API  for Todo Application
 4. `/api/task/:id (Get,Post,Delete,PUT Requests)` -  A set of operation can be done like get delete, update, get and post, remove based on each user.<br/>
 5. `/api/archive (GET)` -  To get all the archive tasks. <br/>
 ` The above 1 and 2 are not protected routes but 3 and 4 are  protected routes requires token.`
-
-#### `Steps to use Api `
-
+```
+Steps to use Api 
 1) Create an Account first by send a /signup post request , If status is 200 then token is created as response. <br/>
-
 1) Create an Account first by send a /signup post request , If status is 200 then token is created as response.
-
 2)Each token is created for each user to inorder to identify each todo tasks.
+```
+
 
 #### `Signup (Post Req)`
 	POST /signup
@@ -67,3 +66,34 @@ async function resAsync(){
 return res;
 }
 ```
+
+#### `/Api/Task/`
+	GET /api/task 
+![alt text](./images/getTasks.PNG) <br/>	
+     
+Example	
+```
+async function resAsync(){
+ let res = await fetch("http://localhost:3030/api/task",{
+                method: "GET",
+                mode: 'cors', // no-cors, cors, *same-origin
+                cache: 'no-cache', // *de
+                headers: {
+                "Content-type":"application/json;charset=utf-8",
+                 Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjZmQ5NGQ2NmEwZTc5MzBmMGFlNDc3OCIsImlhdCI6MTU2MDEyMjU4MiwiZXhwIjoxNTY4NzYyNTgyfQ.fVvrvtae1BGWw_8W4PJ28aGmfjoIOtoq_7YmyWZLlTM"  
+                }
+  
+});
+let r1= await res.json();
+return res;
+}
+resAsync();
+
+```
+	POST /api/task
+![alt text](./images/add_data.PNG) <br/>
+	Require Fields are as shown in the image.
+	
+	 
+
+	

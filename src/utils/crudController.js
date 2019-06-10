@@ -11,7 +11,7 @@ export const createOne = modal => async(req,res)=>{
 * */
 export const getMany = modal => async (req,res)=>{
 	try{
-		const doc = await modal.find({ createdBy: req.user._id }).exec();
+		const doc = await modal.find({ createdBy: req.user._id, archived: false }).exec();
 		if(!doc){
 			res.send(400).send()
 		}
@@ -33,7 +33,7 @@ export const addMany = modal => async (req,res)=>{
 			createdBy
 		}
 	});
-   const doc = await modal.insertMany(newObj).exec();
+   const doc = await modal.insertMany(newObj);
 	res.status(201).json(doc);
 };
 
