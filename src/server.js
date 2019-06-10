@@ -26,12 +26,9 @@ app.use('/api/user', userRouter);
 export const start = async () => {
 	try {
 		await connect().then(async ()=>{
-			let s1 = await User.find({});
-			console.log("check",s1);
 			app.listen(3030, () => {
 				console.log(`REST API on http://localhost:3030/api`)
 			});
-			
 		});
 	} catch (e) {
 		console.error(e)

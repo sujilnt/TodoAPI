@@ -84,8 +84,23 @@ export const getDeletedItems = model => async (req,res)=>{
 		}
 		return res.status(200).json({ data: doc });
 	}catch(e){
-	
+		console.error(e);
+		res.status(400).end()
 	}
+};
+
+const getOne = modal => async (req,res)=>{
+   try{
+   	console.log(req.params.id);
+   	  const doc = await modal.find({ _id: req.params.id }).exec();
+   	  if(!doc){
+   	  return res.status(401).end()
+      }
+	   return res.status(200).json({ data: doc });
+   }catch (e) {
+	   console.error(e);
+	   res.status(400).end()
+   }
 };
 
 export const crudControllers = model => ({
@@ -94,5 +109,6 @@ export const crudControllers = model => ({
 	addMany: addMany(model),
 	removeOne: removeOne(model),
 	updateOne: updateOne(model),
+	getOne:getOne(model),
 	getDeletedItems:getDeletedItems(model)
 });

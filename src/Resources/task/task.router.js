@@ -13,7 +13,8 @@ router
 router
 	.route("/:id")
 	.put(controllers.updateOne)
-	.delete(controllers.removeOne);
+	.delete(controllers.removeOne)
+	.get(controllers.getOne);
 // For Routes api/task/archive
 router
 	.route("/archive")
