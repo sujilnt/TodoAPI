@@ -16,7 +16,7 @@ A REST API  for Todo Application
 ` The above 1 and 2 are not protected routes but 3 and 4 are  protected routes requires token.`
 
 #### `Steps to use Api `
-1) Create an Account first by send a /signup post request , If status is 200 then token is created as response.
+1) Create an Account first by send a /signup post request , If status is 200 then token is created as response. <br/>
 ![alt text](https://github.com/sujilnt/TodoAPI/blob/master/images/geneate_token.PNG) 
 <br/>
 2)Each token is created for each user to inorder to identify each todo tasks.
