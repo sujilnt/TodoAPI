@@ -3,22 +3,18 @@ import controllers from "./task.controller.js"
 
 const router = Router();
 
-//api/item
-// /api/task
-
+// For Routes api/task
 router
 	.route('/')
 	.get(controllers.getMany)
 	.post(controllers.addMany);
  
-// api/task/:id
-
-
+// For Routes  api/task/:id
 router
 	.route("/:id")
 	.put(controllers.updateOne)
 	.delete(controllers.removeOne);
-
+// For Routes api/task/archive
 router
 	.route("/archive")
 	.get(controllers.getDeletedItems);

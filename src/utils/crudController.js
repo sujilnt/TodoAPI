@@ -2,7 +2,8 @@
 * createOne : A function that is used to create a only one task at a time
 * */
 export const createOne = modal => async(req,res)=>{
-	const doc = await modal.create(req.body).exec();
+	const createBy =req.user._id;
+	const doc = await modal.create({...req.body,createBy}).exec();
 	res.status(201).json(doc);
 };
 /*
@@ -10,7 +11,7 @@ export const createOne = modal => async(req,res)=>{
 * */
 export const getMany = modal => async (req,res)=>{
 	try{
-		const doc = await modal.find({}).exec();
+		const doc = await modal.find({ createdBy: req.user._id }).exec();
 		if(!doc){
 			res.send(400).send()
 		}
@@ -25,7 +26,14 @@ export const getMany = modal => async (req,res)=>{
 * addMany : A function that is used to create a multiple task by passing array of objects at a time
 * */
 export const addMany = modal => async (req,res)=>{
-   const doc = await modal.insertMany(req.body).exec()	;
+	const createdBy = req.user._id;
+	const newObj = req.body.map((r)=>{
+		return{
+			...r,
+			createdBy
+		}
+	});
+   const doc = await modal.insertMany(newObj).exec();
 	res.status(201).json(doc);
 };
 
@@ -35,7 +43,8 @@ export const addMany = modal => async (req,res)=>{
 export const removeOne = model => async (req, res) => {
 	try {
 		const removed = await model.findOneAndRemove({
-			_id: req.params.id
+			_id: req.params.id,
+			createdBy: req.user._id,
 		}).exec();
 		
 		if (!removed) {
@@ -54,7 +63,8 @@ export const removeOne = model => async (req, res) => {
 export const updateOne = modal => async (req,res)=>{
 	try{
 	  const updatedTask = await modal.updateOne({
-		  "_id": req.params.id
+		  _id: req.params.id,
+		  createdBy: req.user._id,
 	  },req.body,{new : true}).exec();
 	  if (!updatedTask) {
 	  	return res.status(400).end()
@@ -68,7 +78,7 @@ export const updateOne = modal => async (req,res)=>{
 
 export const getDeletedItems = model => async (req,res)=>{
 	try{
-		const doc = await model.find({"archived":true}).exec();
+		const doc = await model.find({"archived":true, createdBy: req.user._id,}).exec();
 		if(!doc){
 			return res.status(400).end()
 		}
