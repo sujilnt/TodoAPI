@@ -11,7 +11,7 @@ export const newToken = user => {
 		expiresIn: secrets.jwtExp
 	});
 };
-
+// verify token -> verfy s the token
 export const verifyToken = token =>
 	new Promise((resolve, reject) => {
 		jwt.verify(token, secrets.jwt, (err, payload) => {
@@ -23,6 +23,7 @@ export const verifyToken = token =>
 		})
 	});
 
+// signup A controller that controls when the user is navigated to  /signup page .
 export const signup = async (req, res) => {
 	if (!req.body.email || !req.body.password) {
 		return res.status(400).send({ message: 'need email and password' });
@@ -36,7 +37,7 @@ export const signup = async (req, res) => {
 		return res.status(500).end();
 	}
 };
-
+// signin A controller that controls when the user is navigated to  /signin page .
 export const signin = async (req, res) => {
 	if (!req.body.email || !req.body.password) {
 		return res.status(400).send({ message: 'need email and password' });
@@ -72,7 +73,7 @@ export const protect = async (req, res, next) => {
 	if (!bearer || !bearer.startsWith('Bearer ')) {
 		return res.status(401).end();
 	}
-	
+	// "Bearer  token"
 	const token = bearer.split('Bearer ')[1].trim();
 	let payload;
 	try {
