@@ -45,8 +45,6 @@ app.use('/api/user', _User2.default);
 const start = async () => {
   try {
     await (0, _connect.default)().then(async () => {
-      let s1 = await _User.User.find({});
-      console.log("check", s1);
       app.listen(3030, () => {
         console.log(`REST API on http://localhost:3030/api`);
       });

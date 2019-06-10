@@ -8,7 +8,7 @@ A REST API  for Todo Application
 
 #### API EndPoint
 
-1.` /Signup (Post Req)` - Creating a new account for users. <br/>
+1.`/Signup (Post Req)` - Creating a new account for users. <br/>
 2. `/Signin (Post Req)` - A user sign sign in the api, so that he can access the data using api <br/>
 3. `/api/task (Post, GET Req)` - A set of operation can be done like  add,get todo tasks based on each user.<br/>
 4. `/api/task/:id (Get,Post,Delete,PUT Requests)` -  A set of operation can be done like get delete, update, get and post, remove based on each user.<br/>
@@ -16,14 +16,19 @@ A REST API  for Todo Application
 ` The above 1 and 2 are not protected routes but 3 and 4 are  protected routes requires token.`
 
 #### `Steps to use Api `
+
 1) Create an Account first by send a /signup post request , If status is 200 then token is created as response. <br/>
-![alt text](https://github.com/sujilnt/TodoAPI/blob/master/images/geneate_token.PNG) 
-<br/>
+
+1) Create an Account first by send a /signup post request , If status is 200 then token is created as response.
+
 2)Each token is created for each user to inorder to identify each todo tasks.
 
 #### `Signup (Post Req)`
 	POST /signup
-		
+![alt text](https://github.com/sujilnt/TodoAPI/blob/master/images/geneate_token.PNG) <br/>	
+
+Example code
+
 ```
 async function resAsync(){
   data = {
@@ -39,5 +44,26 @@ async function resAsync(){
 })
 return res;
 }
-
+```
+#### `Signin (Post Req)`
+	POST /signup
+![alt text](https://github.com/sujilnt/TodoAPI/blob/master/images/apitoken.PNG) <br/>	
+ 
+ Example code
+ 
+```
+async function resAsync(){
+  data = {
+    "email": "t1@email.com",
+    "password": "t12"
+  }
+ let res = await fetch("http://localhost:3030/signin",{
+                method: "POST",
+                mode: 'cors', // no-cors, cors, *same-origin
+                cache: 'no-cache', // *de
+                body:JSON.stringify(data),
+                headers: {"Content-type":"application/json;charset=utf-8"}
+})
+return res;
+}
 ```
