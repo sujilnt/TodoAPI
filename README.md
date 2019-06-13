@@ -1,6 +1,6 @@
 ### TodoAPI
 
-A REST API  for Todo Application
+A REST API  for Todo Application.
 
 #### Usage
 `yarn install` <br/>
